@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bee Swarm</title>
+    <style>
+        body, html { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background: #000; }
+        #loader-status { color: white; font-family: sans-serif; display: flex; align-items: center; justify-content: center; height: 100vh; }
+    </style>
+</head>
+<body>
+    <div id="loader-status">Loading...</div>
+
+    <script>
+        (async function loadGame() {
+            const url = 'https://cdn.jsdelivr.net/gh/tuffzinc/bssflint@main/singlefile-nongn.html';
+            
+            try {
+                const response = await fetch(url);
+                if (!response.ok) throw new Error('Network response was not ok');
+                
+                const html = await response.text();
+                
+                document.open();
+                document.write(html);
+                document.close();
+            } catch (err) {
+                document.getElementById('loader-status').innerHTML = 'Error loading game: ' + err.message;
+                console.error(err);
+            }
+        })();
+    </script>
+</body>
+</html>
